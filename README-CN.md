@@ -49,7 +49,7 @@
 |地区| 国际  | 国内  |
 |:--|:-----|:-----|
 |MINIMAX_API_KEY| 获取密钥 [MiniMax国际版](https://www.minimax.io/platform/user-center/basic-information/interface-key) | 获取密钥 [MiniMax](https://platform.minimaxi.com/user-center/basic-information/interface-key) |
-|MINIMAX_API_HOST| https://api.minimaxi.chat （请注意额外的 **"i"** 字母） | https://api.minimax.chat |
+|MINIMAX_API_HOST| https://api.minimax.io | https://api.minimaxi.com |
 
 
 ### Claude Desktop
@@ -66,7 +66,7 @@
       "env": {
         "MINIMAX_API_KEY": "填写你的API密钥",
         "MINIMAX_MCP_BASE_PATH": "本地输出目录路径，如/User/xxx/Desktop",
-        "MINIMAX_API_HOST": "填写API Host, https://api.minimax.chat 或 https://api.minimaxi.chat",
+        "MINIMAX_API_HOST": "填写API Host, https://api.minimaxi.com 或 https://api.minimax.io",
         "MINIMAX_API_RESOURCE_MODE": "可选配置，资源生成后的提供方式, 可选项为 [url|local], 默认为 url"
       }
     }
@@ -76,8 +76,8 @@
 
 
 ⚠️ 注意：API Key需要与Host匹配。如果出现“API Error: invalid api key”错误，请检查您的API Host：
-- 国际版Host：`https://api.minimaxi.chat`（请注意额外的 **"i"** 字母）
-- 国内版Host：`https://api.minimax.chat` 
+- 国际版Host：`https://api.minimax.io`
+- 国内版Host：`https://api.minimaxi.com` 
 
 如果你使用Windows，你需要在Claude Desktop中启用"开发者模式"才能使用MCP服务器。点击左上角汉堡菜单中的"Help"，然后选择"Enable Developer Mode"。
 
@@ -110,7 +110,7 @@
 |地区| 国际  | 国内  |
 |:--|:-----|:-----|
 |MINIMAX_API_KEY| 获取密钥 [MiniMax国际版](https://www.minimax.io/platform/user-center/basic-information/interface-key) | 获取密钥 [MiniMax](https://platform.minimaxi.com/user-center/basic-information/interface-key) |
-|MINIMAX_API_HOST| https://api.minimaxi.chat （请注意额外的 **"i"** 字母） | https://api.minimax.chat |
+|MINIMAX_API_HOST| https://api.minimax.io | https://api.minimaxi.com
 
 ### 2. spawn uvx ENOENT
 请在你的终端输入一下命令，查看uvx命令的绝对路径：
