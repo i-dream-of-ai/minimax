@@ -603,20 +603,20 @@ def voice_design(
         generated_voice_id = response_data.get('voice_id', '')
         trial_audio_hex = response_data.get('trial_audio', '')
         
-        if not voice_id:
+        if not generated_voice_id:
             raise MinimaxRequestError("No voice generated")
-        if resource_mode == RESOURCE_MODE_URL:
-            return TextContent(
-                type="text",
-                text=f"Success. Voice ID generated: {generated_voice_id}, Trial Audio: {trial_audio_hex}"
-            )
+        # if resource_mode == RESOURCE_MODE_URL:
+        #     return TextContent(
+        #         type="text",
+        #         text=f"Success. Voice ID generated: {generated_voice_id}, Trial Audio: {trial_audio_hex}"
+        #     )
         
         # hex->bytes
         audio_bytes = bytes.fromhex(trial_audio_hex)
 
         # save audio to file
         output_path = build_output_path(output_directory, base_path)
-        output_file_name = build_output_file("voice_design", preview_text, output_path, format)
+        output_file_name = build_output_file("voice_design", preview_text, output_path, "mp3")
         output_path.parent.mkdir(parents=True, exist_ok=True)
         
         with open(output_path / output_file_name, "wb") as f:
@@ -636,7 +636,8 @@ def voice_design(
 def main():
     print("Starting Minimax MCP server")
     """Run the Minimax MCP server"""
-    mcp.run()
+    mcp.settings.stateless_http = True
+    mcp.run(transport="streamable-http")
 
 
 if __name__ == "__main__":
