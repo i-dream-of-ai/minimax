@@ -656,8 +656,7 @@ def music_generation(
 def main():
     print("Starting Minimax MCP server")
     """Run the Minimax MCP server"""
-    mcp.settings.stateless_http = True
-    mcp.run(transport="streamable-http")
+    mcp.run()
 
 
 if __name__ == "__main__":
