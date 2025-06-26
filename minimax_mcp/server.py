@@ -605,11 +605,11 @@ def voice_design(
         
         if not generated_voice_id:
             raise MinimaxRequestError("No voice generated")
-        # if resource_mode == RESOURCE_MODE_URL:
-        #     return TextContent(
-        #         type="text",
-        #         text=f"Success. Voice ID generated: {generated_voice_id}, Trial Audio: {trial_audio_hex}"
-        #     )
+        if resource_mode == RESOURCE_MODE_URL:
+            return TextContent(
+                type="text",
+                text=f"Success. Voice ID generated: {generated_voice_id}, Trial Audio: {trial_audio_hex}"
+            )
         
         # hex->bytes
         audio_bytes = bytes.fromhex(trial_audio_hex)
@@ -636,8 +636,7 @@ def voice_design(
 def main():
     print("Starting Minimax MCP server")
     """Run the Minimax MCP server"""
-    mcp.settings.stateless_http = True
-    mcp.run(transport="streamable-http")
+    mcp.run()
 
 
 if __name__ == "__main__":
