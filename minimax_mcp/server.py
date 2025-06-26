@@ -623,7 +623,7 @@ def music_generation(
             if resource_mode == RESOURCE_MODE_URL:
                 return TextContent(
                     type="text",
-                    text=f"Success. Music URL: {data.get('url', '')}"
+                    text=f"Success. Music audio: {audio_hex}"
                 )
 
             output_path = build_output_path(output_directory, base_path)
