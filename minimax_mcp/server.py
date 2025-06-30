@@ -297,7 +297,7 @@ def play_audio(input_file_path: str, is_url: bool = False) -> TextContent:
     COST WARNING: This tool makes an API call to Minimax which may incur costs. Only use when explicitly requested by the user.
 
      Args:
-        model (str, optional): The model to use. Values range ["T2V-01", "T2V-01-Director", "I2V-01", "I2V-01-Director", "I2V-01-live"]. "Director" supports inserting instructions for camera movement control. "I2V" for image to video. "T2V" for text to video.
+        model (str, optional): The model to use. Values range ["T2V-01", "T2V-01-Director", "I2V-01", "I2V-01-Director", "I2V-01-live", "MiniMax-Hailuo-02"]. "Director" supports inserting instructions for camera movement control. "I2V" for image to video. "T2V" for text to video.
         prompt (str): The prompt to generate the video from. When use Director model, the prompt supports 15 Camera Movement Instructions (Enumerated Values)
             -Truck: [Truck left], [Truck right]
             -Pan: [Pan left], [Pan right]
