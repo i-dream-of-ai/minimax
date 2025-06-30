@@ -368,7 +368,12 @@ def generate_video(
         file_id = None
         max_retries = 30  # 10 minutes total (30 * 20 seconds)
         retry_interval = 20  # seconds
-        
+
+
+        # MiniMax-Hailuo-02 model has a longer processing time, so we need to wait for a longer time
+        if model == "MiniMax-Hailuo-02":
+            max_retries = 60
+
         for attempt in range(max_retries):
             status_response = api_client.get(f"/v1/query/video_generation?task_id={task_id}")
             status = status_response.get("status")
