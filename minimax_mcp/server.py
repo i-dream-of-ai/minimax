@@ -309,6 +309,8 @@ def play_audio(input_file_path: str, is_url: bool = False) -> TextContent:
             -Follow: [Tracking shot]
             -Static: [Static shot]
         first_frame_image (str): The first frame image. The model must be "I2V" Series.
+        duration (int, optional): The duration of the video. The model must be "MiniMax-Hailuo-02". Values can be 6 and 10.
+        resolution (str, optional): The resolution of the video. The model must be "MiniMax-Hailuo-02". Values range ["768P", "1080P"]
         output_directory (str): The directory to save the video to.
         async_mode (bool, optional): Whether to use async mode. Defaults to False. If True, the video generation task will be submitted asynchronously and the response will return a task_id. Should use `query_video_generation` tool to check the status of the task and get the result.
     Returns:
@@ -319,6 +321,8 @@ def generate_video(
     model: str = DEFAULT_T2V_MODEL,
     prompt: str = "",
     first_frame_image  = None,
+    duration: int = None,
+    resolution: str = None,
     output_directory: str = None,
     async_mode: bool = False
 ):
@@ -345,7 +349,10 @@ def generate_video(
         }
         if first_frame_image:
             payload["first_frame_image"] = first_frame_image
-        
+        if duration:
+            payload["duration"] = duration
+        if resolution:
+            payload["resolution"] = resolution
         response_data = api_client.post("/v1/video_generation", json=payload)
         task_id = response_data.get("task_id")
         if not task_id:
@@ -559,11 +566,107 @@ def text_to_image(
             text=f"Failed to save images: {str(e)}"
         )
 
+<<<<<<< Updated upstream
+=======
+@mcp.tool(
+    description="""Create a music generation task using AI models. Generate music from prompt and lyrics.
+
+    COST WARNING: This tool makes an API call to Minimax which may incur costs. Only use when explicitly requested by the user.
+
+    Args:
+        prompt (str): Music creation inspiration describing style, mood, scene, etc.
+            Example: "Pop music, sad, suitable for rainy nights". Character range: [10, 300]
+        lyrics (str): Song lyrics for music generation.
+            Use newline (\\n) to separate each line of lyrics. Supports lyric structure tags [Intro][Verse][Chorus][Bridge][Outro] 
+            to enhance musicality. Character range: [10, 600] (each Chinese character, punctuation, and letter counts as 1 character)
+        stream (bool, optional): Whether to enable streaming mode. Defaults to False
+        sample_rate (int, optional): Sample rate of generated music. Values: [16000, 24000, 32000, 44100]
+        bitrate (int, optional): Bitrate of generated music. Values: [32000, 64000, 128000, 256000]
+        format (str, optional): Format of generated music. Values: ["mp3", "wav", "pcm"]. Defaults to "mp3"
+        output_directory (str, optional): Directory to save the generated music file
+        
+    Note: Currently supports generating music up to 1 minute in length.
+
+    Returns:
+        Text content with the path to the generated music file or generation status.
+    """
+)
+def music_generation(
+    prompt: str,
+    lyrics: str,
+    sample_rate: int = DEFAULT_SAMPLE_RATE,
+    bitrate: int = DEFAULT_BITRATE,
+    format: str = DEFAULT_FORMAT,
+    channel: int = DEFAULT_CHANNEL,
+    output_directory: str = None
+) -> TextContent:
+        try:
+            # prompt and lyrics params check
+            if not prompt:
+                raise MinimaxRequestError("Prompt is required.")
+            if not lyrics:
+                raise MinimaxRequestError("Lyrics is required.")
+            
+            # Build request payload
+            payload = {
+                "model": DEFAULT_MUSIC_MODEL,
+                "prompt": prompt,
+                "lyrics": lyrics,
+                "audio_setting": {
+                    "sample_rate": sample_rate,
+                    "bitrate": bitrate,
+                    "format": format,
+                    "channel": channel
+                }
+            }
+
+            # Call music generation API
+            response_data = api_client.post("/v1/music_generation", json=payload)
+                    
+            # Handle response
+            data = response_data.get('data', {})
+            audio_hex = data.get('audio', '')
+
+
+            if resource_mode == RESOURCE_MODE_URL:
+                return TextContent(
+                    type="text",
+                    text=f"Success. Music audio: {audio_hex}"
+                )
+
+            output_path = build_output_path(output_directory, base_path)
+            output_file_name = build_output_file("music", f"{prompt}", output_path, format)
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+
+            # hex->bytes
+            audio_bytes = bytes.fromhex(audio_hex)
+
+            # save audio to file
+            with open(output_path / output_file_name, "wb") as f:
+                f.write(audio_bytes)
+
+            return TextContent(
+                type="text",
+                text=f"Success. Music saved as: {output_path / output_file_name}"
+            )
+        
+        except MinimaxAPIError as e:
+            return TextContent(
+                type="text",
+                text=f"Failed to generate music: {str(e)}"
+            )
+        except (IOError, requests.RequestException) as e:
+            return TextContent(
+                type="text",
+                text=f"Failed to save music: {str(e)}"
+        )
+>>>>>>> Stashed changes
 
 def main():
     print("Starting Minimax MCP server")
     """Run the Minimax MCP server"""
-    mcp.run()
+    mcp.settings.stateless_http = True
+    mcp.run(transport="streamable-http")
 
 
 if __name__ == "__main__":
