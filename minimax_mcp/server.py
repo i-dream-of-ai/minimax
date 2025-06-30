@@ -566,8 +566,6 @@ def text_to_image(
             text=f"Failed to save images: {str(e)}"
         )
 
-<<<<<<< Updated upstream
-=======
 @mcp.tool(
     description="""Create a music generation task using AI models. Generate music from prompt and lyrics.
 
@@ -627,7 +625,6 @@ def music_generation(
             data = response_data.get('data', {})
             audio_hex = data.get('audio', '')
 
-
             if resource_mode == RESOURCE_MODE_URL:
                 return TextContent(
                     type="text",
@@ -660,13 +657,11 @@ def music_generation(
                 type="text",
                 text=f"Failed to save music: {str(e)}"
         )
->>>>>>> Stashed changes
 
 def main():
     print("Starting Minimax MCP server")
     """Run the Minimax MCP server"""
-    mcp.settings.stateless_http = True
-    mcp.run(transport="streamable-http")
+    mcp.run()
 
 
 if __name__ == "__main__":
