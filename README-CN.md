@@ -75,7 +75,7 @@
 ```
 
 
-⚠️ 注意：API Key需要与Host匹配。如果出现“API Error: invalid api key”错误，请检查您的API Host：
+⚠️ 注意：API Key需要与Host匹配。如果出现"API Error: invalid api key"错误，请检查您的API Host：
 - 国际版Host：`https://api.minimax.io`
 - 国内版Host：`https://api.minimaxi.com` 
 
@@ -103,6 +103,20 @@
 |`voice_clone`|根据指定音频文件克隆音色|
 |`generate_video`|根据指定 prompt 生成视频|
 |`text_to_image`|根据指定 prompt 生成图片|
+|`music_generation`|根据指定 prompt 和歌词生成音乐|
+|`voice_design`|根据指定 prompt 生成音色和试听文本|
+
+## 更新日志
+
+### 🆕 新增功能
+- **音色设计**: 新增 `voice_design` 工具 - 根据描述性提示词创建自定义音色并生成试听音频
+- **视频生成增强**: 新增 `MiniMax-Hailuo-02` 模型，支持超清画质和时长/分辨率控制
+- **音乐生成**: 采用 `music-1.5` 模型增强 `music_generation` 工具
+
+### 📈 功能增强
+- `voice_design` - 根据文本描述生成个性化音色
+- `generate_video` - 现在支持 MiniMax-Hailuo-02 模型，可选择 6s/10s 时长和 768P/1080P 分辨率
+- `music_generation` - 采用 music-1.5 模型进行高质量音乐创作
 
 ## FAQ
 ### 1. invalid api key
