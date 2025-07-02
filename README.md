@@ -107,12 +107,14 @@ We support two transport types: stdio and sse.
 
 ## Release Notes
 
-### 🆕 What's New
+### July 2, 2025
+
+#### 🆕 What's New
 - **Voice Design**: New `voice_design` tool - create custom voices from descriptive prompts with preview audio
 - **Video Enhancement**: Added `MiniMax-Hailuo-02` model with ultra-clear quality and duration/resolution controls  
 - **Music Generation**: Enhanced `music_generation` tool powered by `music-1.5` model
 
-### 📈 Enhanced Tools
+#### 📈 Enhanced Tools
 - `voice_design` - Generate personalized voices from text descriptions
 - `generate_video` - Now supports MiniMax-Hailuo-02 with 6s/10s duration and 768P/1080P resolution options
 - `music_generation` - High-quality music creation with music-1.5 model
