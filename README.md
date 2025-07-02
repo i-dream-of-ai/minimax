@@ -102,6 +102,20 @@ We support two transport types: stdio and sse.
 |`generate_video`|Generate a video from a prompt|
 |`text_to_image`|Generate a image from a prompt|
 |`query_video_generation`|Query the result of video generation task|
+|`music_generation`|Generate a music track from a prompt and lyrics|
+|`voice_design`|Generate a voice from a prompt using preview text|
+
+## Release Notes
+
+### 🆕 What's New
+- **Voice Design**: New `voice_design` tool - create custom voices from descriptive prompts with preview audio
+- **Video Enhancement**: Added `MiniMax-Hailuo-02` model with ultra-clear quality and duration/resolution controls  
+- **Music Generation**: Enhanced `music_generation` tool powered by `music-1.5` model
+
+### 📈 Enhanced Tools
+- `voice_design` - Generate personalized voices from text descriptions
+- `generate_video` - Now supports MiniMax-Hailuo-02 with 6s/10s duration and 768P/1080P resolution options
+- `music_generation` - High-quality music creation with music-1.5 model
 
 ## FAQ
 ### 1. invalid api key
