@@ -621,7 +621,7 @@ def music_generation(
                 },
             }
             if resource_mode == RESOURCE_MODE_URL:
-                payload["resource_format"] = "url"
+                payload["output_format"] = "url"
 
             # Call music generation API
             response_data = api_client.post("/v1/music_generation", json=payload)
